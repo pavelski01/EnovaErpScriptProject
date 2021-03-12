@@ -59,8 +59,8 @@ try {
     $documentTransaction = $session.Logout($true)
     $document = [Soneta.Handel.DokumentHandlowy]::new()
     $document.Definicja = $tm.DefDokHandlowych.WgSymbolu['FV']
-    $document.Magazyn = $wm.Magazyny.Firma;
-    $tm.DokHandlowe.AddRow($document);
+    $document.Magazyn = $wm.Magazyny.Firma
+    $tm.DokHandlowe.AddRow($document)
     $document.Kontrahent = $crm.Kontrahenci.WgKodu['ABC']
     $merchandise = $mm.Towary.WgKodu['TRANSPORT']
     
