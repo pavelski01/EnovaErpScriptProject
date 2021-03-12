@@ -1,0 +1,52 @@
+﻿<files>
+	<file name="Soneta.Types" />
+	<file name="Soneta.Data" />
+	<file name="Soneta.Business" />
+	<file name="Soneta.Core" />
+  <file name="Soneta.BI" />
+  <file name="Soneta.CRM" />
+	<file name="Soneta.CzlonkowieSzkolenia" />
+	<file name="Soneta.Deklaracje" />
+	<file name="Soneta.Handel" />
+	<file name="Soneta.KadryPlace" />
+	<file name="Soneta.Kasa" />
+	<file name="Soneta.Ksiega" />
+	<file name="Soneta.Zadania" />
+	<file name="Soneta.Workflow" />
+	<file name="Soneta.Web.Business" />
+	<file name="Soneta.Forms" ui="true" />
+	<file name="Soneta.Business.Forms" ui="true" />
+	<file name="Soneta.Core.Forms" ui="true" />
+	<file name="Soneta.CRM.Forms" ui="true" />
+	<file name="Soneta.CzlonkowieSzkolenia.Forms" ui="true" />
+	<file name="Soneta.Deklaracje.Forms" ui="true" />
+	<file name="Soneta.Ksiega.Forms" ui="true" />
+	<file name="Soneta.Handel.Forms" ui="true" />
+	<file name="Soneta.Zadania.Forms" ui="true" />
+	<file name="Soneta.Workflow.Forms" ui="true" />
+	<file name="Soneta.Office.Forms" ui="true" optional="true" />
+	<file name="Soneta.Business.UI" />
+	<file name="Soneta.Core.UI" />
+	<file name="Soneta.KadryPlace.UI" />
+	<file name="Soneta.Deklaracje.UI" />
+	<file name="Soneta.Kasa.UI" />
+	<file name="Soneta.Ksiega.UI" />
+	<file name="Soneta.CRM.UI" />
+	<file name="Soneta.CzlonkowieSzkolenia.UI" />
+	<file name="Soneta.Handel.UI" />
+	<file name="Soneta.Zadania.UI" />
+	<file name="Soneta.Workflow.UI" />
+  <file name="Soneta.BI.UI" />
+  <file name="Soneta.EI" />
+	<file name="Soneta.EI.UI" />
+  <file name="Soneta.Printer" />
+  <file name="Soneta.Core.Printer" />
+  <file name="Soneta.Printer.Forms" ui="true" />
+  <file name="Soneta.Core.Printer.Forms" ui="true" />
+  <file name="Soneta.Net.Types" net="true" />
+  <file name="Soneta.Net.Business" net="true" />
+  <file name="Soneta.EI.Forms" extra="true" />
+  <file name="Soneta.Crystal" extra="true" optional="true" />
+	<file name="Soneta.ReportingServices" extra="true" optional="true" />
+	<file name="Soneta.Excel.Tools" optional="true" />
+</files>
