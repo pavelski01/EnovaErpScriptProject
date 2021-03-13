@@ -36,10 +36,7 @@ param(
         Operator='Administrator'
         Password=''
     },
-    [PSCustomObject]$PrivateExtensions=@{
-        Path='.'
-        Names=@('Soneta.EDI','Soneta.Smsing')
-    }
+    [PSCustomObject]$PrivateExtensions=$null
 )
 
 # Add Soneta types
