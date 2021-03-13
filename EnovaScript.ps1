@@ -8,7 +8,7 @@
                 User='<server database user>';
                 Password='<server database password>'
             } 
-            -ErpAccountCredentals @{Operator='<ERP >';Password=''}
+            -ErpAccountCredentals @{Operator='<ERP user account>';Password='<ERP user password>'}
     
     Example:
         .\EnovaScript.ps1 
