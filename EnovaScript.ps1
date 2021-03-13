@@ -1,10 +1,39 @@
-# Usage: .\EnovaScript.ps1 -SonetaDependenciesRoot <path to Soneta folder with dependencies>
-param([string]$SonetaDependenciesRoot='.')
+<# 
+    Usage: 
+        .\EnovaScript.ps1 
+            -ErpDependenciesRoot '<path to ERP (Soneta enova) folder with dependencies>'
+            -DatabaseCredentals @{
+                DatabaseName='<server database name>';
+                Server='<server database instance>';
+                User='<server database user>';
+                Password='<server database password>'
+            } 
+            -ErpAccountCredentals @{Operator='<ERP >';Password=''}
+    
+    Example:
+        .\EnovaScript.ps1 
+            -ErpDependenciesRoot 'C:\Program Files (x86)\Soneta\enova365 2012.3.4.0'
+            -DatabaseCredentals @{DatabaseName='Nowa_firma';Server='.\enova';User='sa';Password='qwerty12345'} 
+            -ErpAccountCredentals @{Operator='Administrator';Password=''}
+#>
+param(
+    [string]$ErpDependenciesRoot='.',
+    [PSCustomObject]$DatabaseCredentals=@{
+        DatabaseName='Nowa_firma'
+        Server='.\enova'
+        User='sa'
+        Password='qwerty12345'
+    },
+    [PSCustomObject]$ErpAccountCredentals=@{
+        Operator='Administrator'
+        Password=''
+    }
+)
 
 # Add Soneta types
-Add-Type -Path $SonetaDependenciesRoot'\Soneta.Business.dll'
-Add-Type -Path $SonetaDependenciesRoot'\Soneta.Start.dll'
-Add-Type -Path $SonetaDependenciesRoot'\Soneta.Types.dll'
+Add-Type -Path $ErpDependenciesRoot'\Soneta.Business.dll'
+Add-Type -Path $ErpDependenciesRoot'\Soneta.Start.dll'
+Add-Type -Path $ErpDependenciesRoot'\Soneta.Types.dll'
 
 try {
     # Loader
@@ -17,18 +46,18 @@ try {
 
     # Database
     $database = [Soneta.Business.App.MsSqlDatabase]::new()
-    $database.Name = 'Nowa_firma'
-    $database.Server = '.\enova'
-    $database.DatabaseName = 'Nowa_firma'
-    $database.User = 'sa'
-    $database.Password = 'qwerty12345'
+    $database.Name = $DatabaseCredentals.DatabaseName
+    $database.Server = $DatabaseCredentals.Server
+    $database.DatabaseName = $DatabaseCredentals.DatabaseName
+    $database.User = $DatabaseCredentals.User
+    $database.Password = $DatabaseCredentals.Password
     $database.Trusted = $false
     $database.Active = $true
 
     # ERP account credentials
     $loginParameters = [Soneta.Business.App.LoginParameters]::new()
-    $loginParameters.Operator = 'Administrator'
-    $loginParameters.Password = ''
+    $loginParameters.Operator = $ErpAccountCredentals.Operator
+    $loginParameters.Password = $ErpAccountCredentals.Password
     $loginParameters.Mode = [Soneta.Types.AuthenticationType]::UserPassword
 
     # Connect to database
