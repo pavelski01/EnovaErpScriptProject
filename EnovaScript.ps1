@@ -9,12 +9,20 @@
                 Password='<server database password>'
             } 
             -ErpAccountCredentals @{Operator='<ERP user account>';Password='<ERP user password>'}
+            -PrivateExtensions @{
+                Path='<path to folder with private dependencies>'
+                Names=@('<library 1>', '<library 2>')
+            }
     
     Example:
         .\EnovaScript.ps1 
             -ErpDependenciesRoot 'C:\Program Files (x86)\Soneta\enova365 2012.3.4.0'
             -DatabaseCredentals @{DatabaseName='Nowa_firma';Server='.\enova';User='sa';Password='qwerty12345'} 
             -ErpAccountCredentals @{Operator='Administrator';Password=''}
+            -PrivateExtensions @{
+                Path='.'
+                Names=@('Soneta.EDI','Soneta.Smsing')
+            }
 #>
 param(
     [string]$ErpDependenciesRoot='.',
@@ -27,6 +35,10 @@ param(
     [PSCustomObject]$ErpAccountCredentals=@{
         Operator='Administrator'
         Password=''
+    },
+    [PSCustomObject]$PrivateExtensions=@{
+        Path='.'
+        Names=@('Soneta.EDI','Soneta.Smsing')
     }
 )
 
@@ -42,6 +54,12 @@ try {
     $loader.WithNet = $false
     $loader.WithExtra = $true
     $loader.WithExtensions = $false
+    if ($null -ne $PrivateExtensions) {
+        foreach ($assembly in $PrivateExtensions.Names) {
+            $assembly = $assembly + '.dll'
+            $loader.AddPrivateFileExtension([System.IO.Path]::Combine($PrivateExtensions.Path, $assembly))
+        }
+    }
     $loader.Load()
 
     # Database
@@ -78,7 +96,8 @@ try {
     # Begin session
     $session = `
         $login.CreateSession($false, $false, 'ErpSession: ' + [System.Guid]::NewGuid().ToString('N').ToUpper())  
-    
+    #$context = [Soneta.Business.Context]::Empty.Clone($session)
+
     # Initialize modules
     $tm = [Soneta.Handel.HandelModule]::GetInstance($session)
     $crm = [Soneta.CRM.CRMModule]::GetInstance($session)
