@@ -1,9 +1,10 @@
-# Usage: .\EnovaScript.ps1
+# Usage: .\EnovaScript.ps1 -SonetaDependenciesRoot <path to Soneta folder with dependencies>
+param([string]$SonetaDependenciesRoot='.')
 
 # Add Soneta types
-Add-Type -Path .\Soneta.Business.dll
-Add-Type -Path .\Soneta.Start.dll
-Add-Type -Path .\Soneta.Types.dll
+Add-Type -Path $SonetaDependenciesRoot'\Soneta.Business.dll'
+Add-Type -Path $SonetaDependenciesRoot'\Soneta.Start.dll'
+Add-Type -Path $SonetaDependenciesRoot'\Soneta.Types.dll'
 
 try {
     # Loader
